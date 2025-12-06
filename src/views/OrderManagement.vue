@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { apiDeleteOrder, apiGetOrders } from '@/api/order'
+import { apiDeleteOrder, apiGetOrders } from '../api/order'
 import DeleteModal from '@/components/DeleteModal.vue'
 import OrderDetailModal from '@/components/OrderDetailModal.vue'
-import type { Order, Pagination } from '@/types/order'
+import type { Order, Pagination } from '../types/order'
 import { onMounted, ref, useTemplateRef } from 'vue'
 
 const orderDetailModalRef = useTemplateRef('orderDetailModalRef')
@@ -44,7 +44,7 @@ const getOrders = async () => {
 
     orders.value = res.data.orders
     pagination.value = res.data.pagination
-  } catch (error) {
+  } catch {
     alert('取得訂單列表失敗')
   }
 }
@@ -64,7 +64,7 @@ const openDeleteModal = (orderId: string) => {
 const deleteOrder = async (orderId: string) => {
   try {
     await apiDeleteOrder(orderId)
-  } catch (error) {
+  } catch {
     alert('刪除訂單失敗')
   } finally {
     getOrders()
@@ -135,7 +135,7 @@ const deleteOrder = async (orderId: string) => {
               <span aria-hidden="true">&laquo;</span>
             </button>
           </li>
-          <li v-for="pageNum in pagination?.total_pages" class="page-item">
+          <li v-for="pageNum in pagination?.total_pages" :key="pageNum" class="page-item">
             <button
               @click="currentPage = pageNum.toString()"
               :disabled="currentPage === pageNum.toString()"
