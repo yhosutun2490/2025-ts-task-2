@@ -64,8 +64,9 @@ export type CreateProductParams =  Omit<ProductData, 'id' | 'num'>
 // TODO: 定義編輯商品參數型別
 // 提示：編輯商品需要 id 和 data 物件
 
-export type EditProductParams = Partial<Omit<ProductData, 'num'>> & {
+export type EditProductParams = {
   id: string
+  data: Partial<Omit<ProductData, 'id' | 'num'>>
 }
 
 // TODO: 定義取得商品列表回應型別
