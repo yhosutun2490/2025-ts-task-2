@@ -51,6 +51,11 @@ const router = createRouter({
       name: 'checkout',
       component: () => import('@/views/CheckOutView.vue'),
     },
+     {
+      path: '/checkout-success',
+      name: 'checkout-success',
+      component: () => import('@/views/CheckOutSuccess.vue'),
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

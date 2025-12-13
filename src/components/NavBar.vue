@@ -1,15 +1,10 @@
 <script setup lang="ts">
-// import { useCartStore } from '@/stores/cartStore'
+import { useCartStore } from '@/stores/cartStore'
 import { storeToRefs } from 'pinia'
-import { onMounted } from 'vue'
 
-// const cartStore = useCartStore()
+const cartStore = useCartStore()
+const { cart } = storeToRefs(cartStore)
 
-// const { cart } = storeToRefs(cartStore)
-
-// onMounted(() => {
-//   cartStore.getCart()
-// })
 </script>
 
 <template>
