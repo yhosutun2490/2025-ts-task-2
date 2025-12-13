@@ -1,6 +1,9 @@
 import { createApp } from 'vue'
 
 import './assets/styles/all.scss'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 import 'bootstrap/js/dist/collapse'
 

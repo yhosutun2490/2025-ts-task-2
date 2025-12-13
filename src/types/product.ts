@@ -104,3 +104,40 @@ export type UploadImageResponse = {
   success: boolean
   imageUrl: string
 }
+
+/**
+ * 前台商品資料型別
+ */
+export type ProductItem = {
+  id: string
+  title: string
+  category: string
+  description: string
+  content: string
+  imageUrl: string
+  imagesUrl: string[]
+  price: number
+  origin_price: number
+  unit: string
+  num: number
+  is_enabled: number
+}
+
+
+export type GetAllProductsResponse = {
+  success: boolean
+  products: ProductItem[]
+  messages: unknown[]
+}
+
+export type GetProductDetailResponse = {
+  success: boolean
+  product: ProductItem
+  messages: unknown[]
+}
+
+export  type GetProductsByIdResponse = {
+  success: boolean
+  product: ProductItem
+  messages: unknown[]
+}

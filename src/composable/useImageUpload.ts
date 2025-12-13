@@ -1,4 +1,4 @@
-import { apiUploadImage } from '@/api/products'
+import { apiUploadImage } from '@/api/adminProducts'
 import { ref, type Ref } from 'vue'
 
 interface UseImageUploadResult {

@@ -107,3 +107,5 @@ export const apiDeleteProduct = (
 // - 這是一個 async 函式
 export const apiUploadImage = async (file: FormData): Promise<AxiosResponse<UploadImageResponse>> =>
   productApi.post(`/v2/api/${API_PATH}/admin/upload`, file)
+
+

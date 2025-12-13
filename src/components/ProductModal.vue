@@ -15,7 +15,7 @@ TypeScript 練習題目 - 商品彈窗組件
 <script setup lang="ts">
 // TODO: 匯入 API 函式
 // 提示：從 @/api/products 匯入 apiCreateProduct, apiEditProduct
-import { apiCreateProduct, apiEditProduct } from '@/api/products'
+import { apiCreateProduct, apiEditProduct } from '@/api/adminProducts'
 import { useImageUpload } from '@/composable/useImageUpload'
 import { useProductForm } from '@/composable/useProductData'
 

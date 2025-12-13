@@ -15,7 +15,7 @@ TypeScript 練習題目 - 商品管理頁面
 <script setup lang="ts">
 // TODO: 匯入 API 函式
 // 提示：從 @/api/products 匯入 apiDeleteProduct, apiGetProducts
-import { apiDeleteProduct, apiGetProducts } from '@/api/products'
+import { apiDeleteProduct, apiGetProducts } from '@/api/adminProducts'
 
 import DeleteModal from '@/components/DeleteModal.vue'
 import ProductModal from '@/components/ProductModal.vue'
