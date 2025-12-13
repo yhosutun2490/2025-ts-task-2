@@ -1,7 +1,6 @@
 import { type ProductItem } from '@/types/product'
 import { type CouponData } from '@/types/coupon'
 
-
 export type GetCartResponse = {
   success: boolean
   data: {
@@ -19,6 +18,7 @@ export type GetCartResponse = {
   }
   messages: unknown[]
 }
+
 
 export type AddCartItemResponse = {
   success: boolean
