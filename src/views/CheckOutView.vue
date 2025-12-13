@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-// import { apiCreateOrder, apiProcessPayment } from '@/api/order'
+import { apiCreateOrder, apiProcessPayment } from '@/api/order'
 import Navbar from '@/components/NavBar.vue'
 import { useCartStore } from '@/stores/cartStore'
 import { storeToRefs } from 'pinia'
@@ -10,13 +10,13 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 // 定義只有 1 或 2
-const step = ref(1)
+const step = ref<1 | 2>(1)
 
 const cartStore = useCartStore()
 
 const { cart } = storeToRefs(cartStore)
 
-const orderId = ref(null)
+const orderId = ref<string | null>(null)
 
 const form = ref({
   email: '',
@@ -42,14 +42,14 @@ const handleSubmit = async () => {
   try {
     isSubmitting.value = true
 
-    // const { message, ...userData } = form.value
+    const { message, ...userData } = form.value
 
-    // const res = await apiCreateOrder({
-    //   user: userData,
-    //   message,
-    // })
+    const res = await apiCreateOrder({
+      user: userData,
+      message,
+    })
 
-    // orderId.value = res.data.orderId
+    orderId.value = res.data.orderId
     step.value = 2
   } catch {
     alert('訂單建立失敗')
@@ -92,8 +92,7 @@ const handleProcessPayment = async () => {
 
   try {
     isProcessingPayment.value = true
-
-    // await apiProcessPayment(orderId.value)
+    await apiProcessPayment(orderId.value)
     router.push('/checkout-success')
   } catch  {
     alert('付款失敗')

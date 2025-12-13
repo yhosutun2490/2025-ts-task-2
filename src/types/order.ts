@@ -69,3 +69,31 @@ export type ApplyCouponResponse = {
     final_total: number
   }
 }
+
+export type CreateOrderParams = {
+  user: {
+    name: string
+    email: string
+    tel: string
+    address: string
+  }
+  message: string
+}
+
+type MessageResponse = {
+  success: boolean
+  message: string
+}
+/**
+ * 顧客輸入結帳資訊回應型別
+ */
+export type CreateOrderResponse = MessageResponse & {
+  total: number
+  create_at: number
+  orderId: string
+}
+
+/**
+ * 顧客付款後回應型別
+ */
+export type PayOrderResponse = MessageResponse

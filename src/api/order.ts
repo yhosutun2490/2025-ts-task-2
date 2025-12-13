@@ -1,6 +1,13 @@
 import axios from 'axios'
 
-import type { DeleteOrderResponse, GetOrdersResponse, ApplyCouponResponse } from '@/types/order'
+import type {
+  DeleteOrderResponse,
+  GetOrdersResponse,
+  ApplyCouponResponse,
+  CreateOrderParams,
+  CreateOrderResponse,
+  PayOrderResponse,
+} from '@/types/order'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 const API_PATH = import.meta.env.VITE_API_PATH
@@ -33,9 +40,7 @@ orderApi.interceptors.response.use(
   },
 )
 
-export const apiGetOrders = (params: {
-  page?: string
-}) =>
+export const apiGetOrders = (params: { page?: string }) =>
   orderApi.get<GetOrdersResponse>(`/v2/api/${API_PATH}/admin/orders`, { params })
 
 export const apiDeleteOrder = (orderId: string) =>
@@ -48,3 +53,15 @@ export const apiDeleteOrder = (orderId: string) =>
  */
 export const apiApplyCoupon = (couponCode: string) =>
   orderApi.post<ApplyCouponResponse>(`/v2/api/${API_PATH}/coupon`, { data: { code: couponCode } })
+
+/**
+ * 顧客輸入結帳資訊
+ */
+export const apiCreateOrder = (params: CreateOrderParams) => {
+  return orderApi.post<CreateOrderResponse>(`/v2/api/${API_PATH}/order`, { data: params })
+}
+
+/** 顧客付款 */
+export const apiProcessPayment = (orderId: string) => {
+  return orderApi.post<PayOrderResponse>(`/v2/api/${API_PATH}/pay/${orderId}`)
+}
