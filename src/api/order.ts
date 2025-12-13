@@ -47,4 +47,4 @@ export const apiDeleteOrder = (orderId: string) =>
  * @returns
  */
 export const apiApplyCoupon = (couponCode: string) =>
-  orderApi.post<ApplyCouponResponse>(`/v2/api/${API_PATH}/coupon`, { code: couponCode })
+  orderApi.post<ApplyCouponResponse>(`/v2/api/${API_PATH}/coupon`, { data: { code: couponCode } })
