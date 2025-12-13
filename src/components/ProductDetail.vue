@@ -7,12 +7,12 @@ import Swiper from 'swiper'
 import { Autoplay } from 'swiper/modules'
 
 import Footer from '@/components/Footer.vue'
-import Navbar from '@/components/Navbar.vue'
+import Navbar from '@/components/NavBar.vue'
 
 import { apiGetProductDetail, apiGetProducts } from '@/api/product'
 // import { useCartStore } from '@/stores/cartStore'
 
-const productNum = ref(1)
+const productNum = ref<number>(1)
 
 const route = useRoute()
 
