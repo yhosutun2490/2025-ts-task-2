@@ -93,6 +93,7 @@ const handleApplyCoupon = async () => {
   try {
     isApplyingCoupon.value = true
     await apiApplyCoupon(couponCode.value)
+    cartStore.getCart() // 重新更新購物車折扣資料
   } catch {
     alert('套用優惠券失敗，優惠券已過期或不存在')
   } finally {
@@ -215,9 +216,15 @@ const handleApplyCoupon = async () => {
             <table class="table text-muted border-bottom">
               <tbody>
                 <tr>
-                  <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">小計</th>
+                  <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">原價小計</th>
                   <td class="text-end border-0 px-0 pt-4">
-                    NT${{ cart?.total.toLocaleString('zh-TW') }}
+                    NT$ {{ cart?.total.toLocaleString('zh-TW') }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="border-0 px-0 pt-0 font-weight-normal">折扣</th>
+                  <td class="text-end border-0 px-0 pt-0 text-success">
+                    {{ ((cart?.total - cart?.final_total) / cart?.total * 100).toFixed(2) }} %
                   </td>
                 </tr>
                 <tr>

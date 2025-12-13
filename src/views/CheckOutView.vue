@@ -123,12 +123,13 @@ const handleProcessPayment = async () => {
                   class="me-2"
                   style="width: 48px; height: 48px; object-fit: cover"
                 />
-                <div class="w-100">
+                <div class="w-100 d-flex justify-content-between">
                   <div class="d-flex justify-content-between">
                     <p class="mb-0 fw-bold">{{ cartItem.product.title }}</p>
-                    <p class="mb-0">NT${{ cartItem.final_total.toLocaleString('zh-TW') }}</p>
+                    <span class="mx-1">x</span>
+                    <p class="ml-2 mb-0 fw-bold">{{ cartItem.qty }}</p>
                   </div>
-                  <p class="mb-0 fw-bold">x{{ cartItem.qty }}</p>
+                  <p class="mb-0">NT$ {{ cartItem.final_total.toLocaleString('zh-TW') }}</p>
                 </div>
               </div>
             </div>
@@ -137,7 +138,13 @@ const handleProcessPayment = async () => {
                 <tr>
                   <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">小計</th>
                   <td class="text-end border-0 px-0 pt-4">
-                    NT${{ cart?.total.toLocaleString('zh-TW') }}
+                    NT$ {{ cart?.total.toLocaleString('zh-TW') }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="border-0 px-0 pt-0 font-weight-normal">折扣</th>
+                  <td class="text-end border-0 px-0 pt-0 text-success">
+                    {{ ((cart?.total - cart?.final_total) / cart?.total * 100).toFixed(2) }} %
                   </td>
                 </tr>
                 <tr>
