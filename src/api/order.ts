@@ -1,6 +1,6 @@
-import axios, { type AxiosResponse } from 'axios'
+import axios from 'axios'
 
-import type { DeleteOrderResponse, GetOrdersResponse } from '@/types/order'
+import type { DeleteOrderResponse, GetOrdersResponse, ApplyCouponResponse } from '@/types/order'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 const API_PATH = import.meta.env.VITE_API_PATH
@@ -35,8 +35,16 @@ orderApi.interceptors.response.use(
 
 export const apiGetOrders = (params: {
   page?: string
-}): Promise<AxiosResponse<GetOrdersResponse>> =>
-  orderApi.get(`/v2/api/${API_PATH}/admin/orders`, { params })
+}) =>
+  orderApi.get<GetOrdersResponse>(`/v2/api/${API_PATH}/admin/orders`, { params })
 
-export const apiDeleteOrder = (orderId: string): Promise<AxiosResponse<DeleteOrderResponse>> =>
-  orderApi.delete(`/v2/api/${API_PATH}/admin/order/${orderId}`)
+export const apiDeleteOrder = (orderId: string) =>
+  orderApi.delete<DeleteOrderResponse>(`/v2/api/${API_PATH}/admin/order/${orderId}`)
+
+/**
+ * 套用優惠卷
+ * @param couponCode 優惠卷代碼
+ * @returns
+ */
+export const apiApplyCoupon = (couponCode: string) =>
+  orderApi.post<ApplyCouponResponse>(`/v2/api/${API_PATH}/coupon`, { code: couponCode })

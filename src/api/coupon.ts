@@ -54,9 +54,9 @@ export const apiCreateCoupon = (params: CreateCouponParams) => {
 }
 
 // 編輯優惠券
-export const apiEditCoupon = ({ id, ...params }: EditCouponParams) => {
+export const apiEditCoupon = ({ id, data }: EditCouponParams) => {
   return couponApi.put<EditCouponResponse>(`/v2/api/${API_PATH}/admin/coupon/${id}`, {
-    params,
+    data,
   })
 }
 

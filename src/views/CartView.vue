@@ -3,8 +3,7 @@ import 'swiper/css'
 
 import Footer from '@/components/Footer.vue'
 import Navbar from '@/components/NavBar.vue'
-
-// import { apiApplyCoupon } from '@/api/order'
+import { apiApplyCoupon } from '@/api/order'
 import { apiGetProducts } from '@/api/product'
 import { useCartStore } from '@/stores/cartStore'
 import type { CartItem } from '@/types/cart'
@@ -84,17 +83,16 @@ const handleDeleteCartItem = async (cartId: string) => {
   cartStore.deleteCartItem(cartId)
 }
 
-const couponCode = ref('')
+const couponCode = ref<string>('')
 
-const isApplyingCoupon = ref(false)
+const isApplyingCoupon = ref<boolean>(false)
 
 const handleApplyCoupon = async () => {
   if (!couponCode.value.trim()) return
 
   try {
     isApplyingCoupon.value = true
-
-    // await apiApplyCoupon(couponCode.value)
+    await apiApplyCoupon(couponCode.value)
   } catch {
     alert('套用優惠券失敗，優惠券已過期或不存在')
   } finally {
@@ -104,8 +102,8 @@ const handleApplyCoupon = async () => {
 </script>
 
 <template>
+  <Navbar />
   <div class="container">
-    <Navbar />
     <div
       v-if="cart?.carts.length === 0"
       class="min-vh-100 d-flex flex-column justify-content-center align-items-center"

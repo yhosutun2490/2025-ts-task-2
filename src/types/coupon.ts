@@ -10,6 +10,7 @@ export type CouponData = {
   percent: number,
   due_date: number,
   code: string,
+  num: number,
 }
 
 /**
@@ -17,7 +18,7 @@ export type CouponData = {
  * @property {CouponData} - 要建立的優惠券資料
  * - duce_date 為時間戳數字
  */
-export type CreateCouponParams = CouponData
+export type CreateCouponParams = Omit<CouponData, 'id' | 'num'>
 
 /**
 * 編輯優惠券參數型別
@@ -26,7 +27,7 @@ export type CreateCouponParams = CouponData
 */
 export type EditCouponParams = {
   id: CouponData['id']
-  data: Omit<CouponData, 'id'>
+  data: Omit<CouponData, 'id' | 'num'>
 }
 
 // 分頁資訊型別

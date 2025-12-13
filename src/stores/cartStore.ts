@@ -1,7 +1,7 @@
 import { apiAddCartItem, apiDeleteCartItem, apiGetCart, apiUpdateCartItem } from '@/api/cart'
 import type { CartItem } from '@/types/cart'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 export const useCartStore = defineStore('cart', () => {
   const cart = ref<{ carts: CartItem[]; total: number; final_total: number }>({
@@ -67,6 +67,9 @@ export const useCartStore = defineStore('cart', () => {
       isDeleting.value = false
     }
   }
+  onMounted(()=>{
+    getCart()
+  })
 
   return { cart, isUpdating, isDeleting, getCart, addCartItem, updataCartItem, deleteCartItem }
 })

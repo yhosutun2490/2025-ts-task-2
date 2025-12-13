@@ -61,3 +61,11 @@ export type DeleteOrderResponse = {
   success: boolean
   message: string
 }
+
+export type ApplyCouponResponse = {
+  success: boolean
+  message: string
+  data: {
+    final_total: number
+  }
+}

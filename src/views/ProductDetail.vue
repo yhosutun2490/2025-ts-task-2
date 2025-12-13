@@ -11,13 +11,13 @@ import Navbar from '@/components/NavBar.vue'
 
 import { apiGetProductDetail, apiGetProducts } from '@/api/product'
 import { type ProductItem } from '@/types/product'
-// import { useCartStore } from '@/stores/cartStore'
+import { useCartStore } from '@/stores/cartStore'
 
 const productNum = ref(1)
 
 const route = useRoute()
 
-// const cartStore = useCartStore()
+const cartStore = useCartStore()
 
 const productId = computed(() => route.params.id as string)
 
@@ -105,10 +105,10 @@ watch(
 )
 
 const handleAddCartItem = async () => {
-  //   cartStore.addCartItem({
-  //     product_id: productId.value,
-  //     qty: productNum.value,
-  //   })
+    cartStore.addCartItem({
+      product_id: productId.value,
+      qty: productNum.value,
+    })
 }
 </script>
 

@@ -104,12 +104,8 @@ const handleProcessPayment = async () => {
 </script>
 
 <template>
+   <Navbar />
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-10">
-        <Navbar />
-      </div>
-    </div>
     <template v-if="cart?.carts && cart?.carts.length > 0">
       <div class="row justify-content-center">
         <div class="col-md-10">
@@ -245,7 +241,7 @@ const handleProcessPayment = async () => {
                   isSubmitting || !isEmailValid || !isNameValid || !isPhoneValid || !isAddressValid
                 "
                 type="button"
-                class="btn btn-dark py-3 px-7"
+                class="btn btn-dark"
               >
                 下一步
               </button>

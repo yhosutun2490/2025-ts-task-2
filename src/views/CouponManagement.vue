@@ -7,13 +7,14 @@ import { formatDate } from '@/utils/date'
 import { onMounted, ref, useTemplateRef } from 'vue'
 
 
-const initialFormData: CouponData = {
+const initialFormData: CouponData= {
   id: '',
   title: '',
   is_enabled: 0,
   percent: 0,
   due_date: Date.now() / 1000,
   code: '',
+  num: 0,
 }
 
 const form = ref<CouponData>(initialFormData)
@@ -51,7 +52,6 @@ const deleteModalRef = useTemplateRef<InstanceType <typeof DeleteModal>>('delete
 const isLoading = ref(false)
 
 const openModal = (coupon?: CouponData) => {
-  console.log('coupon', coupon)
   if (coupon) {
     form.value = { ...coupon }
   } else {
@@ -60,19 +60,19 @@ const openModal = (coupon?: CouponData) => {
 
   couponModalRef.value?.openModal(async (couponData: CouponData) => {
     isLoading.value = true
-
+    const { id, ...editData } = couponData
     try {
       if (coupon) {
         await apiEditCoupon({
-          id: couponData.id,
+          id,
           data: {
-            ...couponData,
+            ...editData,
             is_enabled: Number(couponData.is_enabled),
           },
         })
       } else {
         await apiCreateCoupon({
-          ...couponData,
+          ...editData,
           is_enabled: Number(couponData.is_enabled),
         })
       }
