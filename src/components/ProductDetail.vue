@@ -8,20 +8,20 @@ import { Autoplay } from 'swiper/modules'
 
 import Footer from '@/components/Footer.vue'
 import Navbar from '@/components/NavBar.vue'
-
+import type { ProductData } from '@/types/product'
 import { apiGetProductDetail, apiGetProducts } from '@/api/product'
-// import { useCartStore } from '@/stores/cartStore'
+import { useCartStore } from '@/stores/cartStore'
 
 const productNum = ref<number>(1)
 
 const route = useRoute()
 
-// const cartStore = useCartStore()
+const cartStore = useCartStore()
 
 const productId = computed(() => route.params.id as string)
 
 // 定義型別
-const product = ref({
+const product = ref<ProductData>({
   category: '',
   content: '',
   description: '',
@@ -36,13 +36,13 @@ const product = ref({
   unit: '',
 })
 
-const recommend = ref([])
+const recommend = ref<ProductData[]>([])
 
 const getProductDetail = async () => {
   try {
     const res = await apiGetProductDetail(productId.value)
     product.value = res.data.product
-  } catch (error) {
+  } catch {
     alert('取得產品資訊失敗')
   }
 }
@@ -52,7 +52,7 @@ onMounted(() => {
   getProducts()
 })
 
-const recommendCategory = computed(() => {
+const recommendCategory = computed<string>(() => {
   if (!product.value) return ''
 
   return product.value.category
@@ -62,12 +62,12 @@ const getProducts = async () => {
   try {
     const res = await apiGetProducts({ category: recommendCategory.value })
     recommend.value = res.data.products
-  } catch (error) {
+  } catch  {
     alert('取得產品列表失敗')
   }
 }
 
-const recommendProducts = computed(() => {
+const recommendProducts = computed<ProductData[]>(() => {
   if (!recommend.value) return []
 
   return recommend.value.filter((product) => product.id !== route.params.id)
@@ -83,7 +83,7 @@ watch(
 
     await nextTick() // 保證 swiper DOM 已渲染
     if (swiperContainer.value) {
-      const swiper = new Swiper(swiperContainer.value, {
+      new Swiper(swiperContainer.value, {
         modules: [Autoplay],
         loop: true,
         autoplay: {
@@ -104,10 +104,10 @@ watch(
 )
 
 const handleAddCartItem = async () => {
-  //   cartStore.addCartItem({
-  //     product_id: productId.value,
-  //     qty: productNum.value,
-  //   })
+    cartStore.addCartItem({
+      product_id: productId.value,
+      qty: productNum.value,
+    })
 }
 </script>
 

@@ -34,7 +34,8 @@ const handleLogout = async () => {
   isProcessLogout.value = true
   try {
     await apiUserLogout()
-  } catch (error) {
+  } catch {
+    alert('登出失敗，請稍後再試')
   } finally {
     isProcessLogout.value = true
     router.push('/login')

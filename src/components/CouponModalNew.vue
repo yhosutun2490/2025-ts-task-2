@@ -20,6 +20,7 @@ const initialFormData: CouponData = {
   percent: 0,
   due_date: Date.now() / 1000,
   code: '',
+  num: 0,
 }
 
 const tempCoupon = ref<CouponData>(initialFormData)
