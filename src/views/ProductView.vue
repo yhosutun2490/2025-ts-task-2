@@ -2,7 +2,7 @@
 import { computed, onMounted, ref } from 'vue'
 
 import Footer from '@/components/Footer.vue'
-import Navbar from '@/components/Navbar.vue'
+import Navbar from '@/components/NavBar.vue'
 
 import { apiGetAllProducts, apiGetProducts } from '@/api/product'
 import type { Pagination, ProductItem } from '@/types/product'
@@ -59,9 +59,7 @@ const categories = computed(() => {
 </script>
 
 <template>
-  <div class="container">
-    <Navbar />
-  </div>
+  <Navbar />
   <div
     class="position-relative d-flex align-items-center justify-content-center"
     style="min-height: 400px"
@@ -91,12 +89,12 @@ const categories = computed(() => {
         >
           <div class="card border-0">
             <div
-              class="card-header px-0 py-4 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0"
+              class="card-header px-0 py-10 bg-white border border-bottom-0 border-top border-start-0 border-end-0 rounded-0"
               id="headingOne"
               data-bs-toggle="collapse"
               data-bs-target="#collapseOne"
             >
-              <div class="d-flex justify-content-between align-items-center pe-1">
+              <div class="d-flex justify-content-between align-items-center" style="padding: 0 20px;">
                 <h4 class="mb-0">分類</h4>
                 <i class="fas fa-chevron-down"></i>
               </div>
@@ -107,12 +105,12 @@ const categories = computed(() => {
               aria-labelledby="headingOne"
               data-bs-parent="#accordionExample"
             >
-              <div class="card-body py-0">
+              <div class="card-body p-0">
                 <ul class="list-unstyled">
                   <li>
                     <button
                       @click="selectedCategory = ''"
-                      class="d-block py-2 border-0 bg-transparent text-muted"
+                      class="d-block py-2 px-3 border-0 bg-transparent text-muted"
                       type="button"
                     >
                       全部
@@ -121,7 +119,7 @@ const categories = computed(() => {
                   <li v-for="category in categories" :key="category">
                     <button
                       @click="selectedCategory = category"
-                      class="d-block py-2 border-0 bg-transparent text-muted"
+                      class="d-block py-2 px-3 border-0 bg-transparent text-muted"
                       type="button"
                     >
                       {{ category }}
@@ -150,7 +148,7 @@ const categories = computed(() => {
               >
                 <i class="far fa-heart"></i>
               </button>
-              <div class="card-body p-0">
+              <div class="card-body p-10">
                 <h4 class="mb-0 mt-3">
                   <RouterLink :to="`/products/${product.id}`">{{ product.title }}</RouterLink>
                 </h4>

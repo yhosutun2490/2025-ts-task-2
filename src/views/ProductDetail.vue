@@ -7,7 +7,7 @@ import Swiper from 'swiper'
 import { Autoplay } from 'swiper/modules'
 
 import Footer from '@/components/Footer.vue'
-import Navbar from '@/components/Navbar.vue'
+import Navbar from '@/components/NavBar.vue'
 
 import { apiGetProductDetail, apiGetProducts } from '@/api/product'
 import { type ProductItem } from '@/types/product'
@@ -84,7 +84,7 @@ watch(
 
     await nextTick() // 保證 swiper DOM 已渲染
     if (swiperContainer.value) {
-      const swiper = new Swiper(swiperContainer.value, {
+      new Swiper(swiperContainer.value, {
         modules: [Autoplay],
         loop: true,
         autoplay: {
@@ -113,12 +113,12 @@ const handleAddCartItem = async () => {
 </script>
 
 <template>
+  <Navbar />
   <div class="container">
-    <Navbar />
     <div class="row align-items-center">
       <div class="col-md-7">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-white px-0 mb-0 py-3">
+          <ol class="breadcrumb px-0 mb-0 py-3">
             <li class="breadcrumb-item"><RouterLink class="text-muted" to="/">首頁</RouterLink></li>
             <li class="breadcrumb-item">
               <RouterLink class="text-muted" to="/products">產品列表</RouterLink>
@@ -235,7 +235,7 @@ const handleAddCartItem = async () => {
                 style="height: 280px"
                 :alt="recommendProduct.title"
               />
-              <div class="card-body p-0">
+              <div class="card-body p-10">
                 <h4 class="mb-0 mt-3">
                   <RouterLink :to="`/products/${recommendProduct.id}`">{{
                     recommendProduct.title

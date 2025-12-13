@@ -14,10 +14,10 @@ import { onMounted } from 'vue'
 
 <template>
   <nav
-    class="navbar navbar-expand-lg navbar-light bg-white mt-n1 py-2 px-3 z-1"
-    style="margin: 0 -0.75rem"
+    class="navbar navbar-expand-lg navbar-light bg-white mt-n1 py-10 px-3 z-1"
   >
-    <RouterLink class="navbar-brand" to="/">
+    <div class="container">
+       <RouterLink class="navbar-brand" to="/">
       <img
         class="img-fluid"
         style="width: 3.75rem; height: 3.75rem"
@@ -51,6 +51,7 @@ import { onMounted } from 'vue'
           </div></RouterLink
         >
       </div>
+    </div>
     </div>
   </nav>
 </template>
