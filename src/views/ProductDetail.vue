@@ -10,6 +10,7 @@ import Footer from '@/components/Footer.vue'
 import Navbar from '@/components/Navbar.vue'
 
 import { apiGetProductDetail, apiGetProducts } from '@/api/product'
+import { type ProductItem } from '@/types/product'
 // import { useCartStore } from '@/stores/cartStore'
 
 const productNum = ref(1)
@@ -21,7 +22,7 @@ const route = useRoute()
 const productId = computed(() => route.params.id as string)
 
 // 定義型別
-const product = ref({
+const product = ref<ProductItem>({
   category: '',
   content: '',
   description: '',
@@ -36,13 +37,13 @@ const product = ref({
   unit: '',
 })
 
-const recommend = ref([])
+const recommend = ref<ProductItem[]>([])
 
 const getProductDetail = async () => {
   try {
     const res = await apiGetProductDetail(productId.value)
     product.value = res.data.product
-  } catch (error) {
+  } catch  {
     alert('取得產品資訊失敗')
   }
 }
@@ -62,7 +63,7 @@ const getProducts = async () => {
   try {
     const res = await apiGetProducts({ category: recommendCategory.value })
     recommend.value = res.data.products
-  } catch (error) {
+  } catch  {
     alert('取得產品列表失敗')
   }
 }
