@@ -1,10 +1,10 @@
 import { apiAddCartItem, apiDeleteCartItem, apiGetCart, apiUpdateCartItem } from '@/api/cart'
-import type { ProductItem } from '@/types/product'
+import type { CartItem } from '@/types/cart'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useCartStore = defineStore('cart', () => {
-  const cart = ref<{ carts: ProductItem[]; total: number; final_total: number }>({
+  const cart = ref<{ carts: CartItem[]; total: number; final_total: number }>({
     carts: [],
     total: 0,
     final_total: 0,
@@ -17,7 +17,7 @@ export const useCartStore = defineStore('cart', () => {
     try {
       const res = await apiGetCart()
       cart.value = {
-        carts: res.data.data.carts.map(item => item.product),
+        carts: res.data.data.carts,
         total: res.data.data.total,
         final_total: res.data.data.final_total,
       }

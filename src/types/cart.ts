@@ -18,7 +18,7 @@ export type GetCartResponse = {
   }
   messages: unknown[]
 }
-
+export type CartItem = GetCartResponse['data']['carts'][number]
 
 export type AddCartItemResponse = {
   success: boolean
